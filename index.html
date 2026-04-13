@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адаптация, мониторинг и аналитика импортного и закрытого оборудования — ПромАдапт</title>
+  <meta name="description" content="ПромАдапт подключает, дорабатывает и делает понятным импортное и закрытое оборудование: китайские станки, линии, PLC, АСУ ТП. Мониторинг, Factory Data Hub, интеграция с 1С и ERP.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#2a9bb5">
+  <link rel="canonical" href="https://promadapt.ru/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Адаптация, мониторинг и аналитика импортного и закрытого оборудования — ПромАдапт">
+  <meta property="og:description" content="Подключаем, дорабатываем и делаем понятным импортное и закрытое оборудование, включая китайские станки и линии. Мониторинг, Factory Data Hub, интеграция с 1С и ERP.">
+  <meta property="og:url" content="https://promadapt.ru/">
+  <meta property="og:image" content="https://promadapt.ru/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ПромАдапт — адаптация, мониторинг и аналитика оборудования">
+  <meta name="twitter:description" content="Китайские станки, закрытые контроллеры, импортное оборудование без сопровождения. Подключаем, дорабатываем, интегрируем.">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ПромАдапт",
+      "url": "https://promadapt.ru/",
+      "logo": "https://promadapt.ru/logo.png",
+      "email": "promadapt@rambler.ru",
+      "sameAs": [
+        "https://t.me/prom_adapt"
+      ]
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --line: rgba(0, 0, 0, 0.09);
+      --text: #15181c;
+      --muted: #5d6974;
+      --accent: #2a9bb5;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --max-w: 1120px;
+      --r: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 var(--font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Sticky header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: saturate(150%) blur(10px);
+      -webkit-backdrop-filter: saturate(150%) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .site-header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      flex: 0 0 auto;
+    }
+    .site-header-brand img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex: 1 1 auto;
+    }
+    .site-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      white-space: nowrap;
+    }
+    .site-nav a:hover { color: var(--text); }
+    .site-nav-contact {
+      margin-left: auto;
+      color: var(--text) !important;
+      font-weight: 600 !important;
+    }
+    .site-nav-contact:hover { color: var(--accent) !important; }
+    .site-nav-cta {
+      padding: 8px 16px;
+      background: var(--accent);
+      color: #ffffff !important;
+      border-radius: 8px;
+      font-weight: 600 !important;
+    }
+    .site-nav-cta:hover { background: #1f7e94; color: #ffffff !important; }
+    .site-header-contacts {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 0 0 auto;
+    }
+    .site-header-contacts a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+    .site-header-contacts a:hover { color: var(--accent); }
+    .site-header-contacts svg {
+      width: 14px;
+      height: 14px;
+      flex: 0 0 14px;
+      display: block;
+    }
+
+    /* Burger */
+    .site-nav-toggle {
+      display: none;
+      margin-left: auto;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .section-wrap {
+      --section-accent: var(--accent);
+      --section-tint: var(--surface);
+      background: var(--section-tint);
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 68px;
+    }
+    .section-wrap:last-child { border-bottom: none; }
+
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 56px 32px;
+    }
+
+    /* Section themes — цветные только акценты, фоны нейтральные */
+    .section-cover    {
+      --section-accent: #8fd3e0;
+      --section-tint: #0d1b24;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(13, 27, 36, 0.78) 0%, rgba(13, 27, 36, 0.86) 100%),
+        url("./cover.jpg") center/cover no-repeat;
+    }
+    .section-problem  { --section-accent: #c44450; --section-tint: #ffffff; }
+    .section-work     { --section-accent: #23777b; --section-tint: #fafbfc; }
+    .section-connect  { --section-accent: #23777b; --section-tint: #ffffff; }
+    .section-platform { --section-accent: #506d84; --section-tint: #fafbfc; }
+    .section-monitor  { --section-accent: #1ea85a; --section-tint: #ffffff; }
+    .section-ai       { --section-accent: #6a56a5; --section-tint: #fafbfc; }
+    .section-case     { --section-accent: #8b5e3c; --section-tint: #ffffff; }
+    .section-value    { --section-accent: #c47a1f; --section-tint: #fafbfc; }
+    .section-why      { --section-accent: #2e8b57; --section-tint: #ffffff; }
+    .section-pilot    { --section-accent: #2f6e91; --section-tint: #fafbfc; }
+    .section-cta      { --section-accent: #4d63d9; --section-tint: #ffffff; }
+
+    /* Typography */
+    .kicker {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--section-accent);
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: clamp(26px, 3vw, 36px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      max-width: 22ch;
+    }
+    h2 {
+      font-size: clamp(22px, 2.4vw, 28px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      margin-bottom: 8px;
+      max-width: 26ch;
+    }
+    h3 {
+      font-size: 17px;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 68ch;
+      margin-bottom: 24px;
+    }
+    p { max-width: 74ch; }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    /* Card */
+    .card {
+      padding: 18px 20px;
+      border-radius: var(--r);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .card p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+    .card.tinted {
+      background: color-mix(in srgb, var(--section-accent) 5%, var(--surface));
+      border-color: color-mix(in srgb, var(--section-accent) 18%, var(--line));
+    }
+
+    /* Flat list */
+    .flat-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .flat-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .flat-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 10px;
+      height: 2px;
+      background: var(--section-accent);
+      border-radius: 1px;
+    }
+    .flat-list li strong { color: var(--text); font-weight: 600; }
+    .flat-list.muted li { color: var(--muted); }
+    .flat-list.muted li strong { color: var(--text); }
+
+    /* Pull quote */
+    .pullquote {
+      margin-top: 20px;
+      padding: 14px 18px;
+      border-left: 3px solid color-mix(in srgb, var(--section-accent) 55%, transparent);
+      background: color-mix(in srgb, var(--section-accent) 5%, var(--surface));
+      border-radius: 0 var(--r) var(--r) 0;
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--text);
+      max-width: 82ch;
+    }
+    .pullquote strong { font-weight: 600; }
+
+    /* Cover */
+    .section-cover section {
+      padding-top: 72px;
+      padding-bottom: 72px;
+      text-align: center;
+      color: #ffffff;
+    }
+    .cover-inner { max-width: 760px; margin: 0 auto; }
+    .cover-title { font-size: clamp(26px, 3vw, 38px); margin: 0 auto; color: #ffffff; }
+    .cover-subtitle {
+      max-width: 48ch;
+      margin: 16px auto 0;
+      font-size: 17px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    /* Roles grid (problem) */
+    .role h3 {
+      color: var(--section-accent);
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    .role ul { list-style: none; padding: 0; display: grid; gap: 10px; }
+    .role li {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text);
+      padding-left: 14px;
+      position: relative;
+    }
+    .role li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0.62em;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--section-accent) 75%, transparent);
+    }
+
+    /* Offer table */
+    .offer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .offer-table th, .offer-table td {
+      text-align: left;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .offer-table tbody tr:last-child td { border-bottom: none; }
+    .offer-table th {
+      background: color-mix(in srgb, var(--section-accent) 5%, var(--surface));
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .offer-table td:first-child {
+      width: 44px;
+      font-weight: 700;
+      color: var(--section-accent);
+      font-variant-numeric: tabular-nums;
+    }
+    .offer-table td:nth-child(2) { width: 28%; font-weight: 600; color: var(--text); }
+    .offer-table td:nth-child(3) { color: var(--muted); }
+    .offer-table tr.addon td:first-child { color: var(--muted); font-weight: 600; }
+
+    /* Case blocks */
+    .case-block { padding: 18px 22px; border-radius: var(--r); background: var(--surface); border-left: 3px solid; border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .case-block h3 { margin-bottom: 14px; font-size: 17px; }
+    .case-block ul { list-style: none; padding: 0; display: grid; gap: 11px; }
+    .case-block li { font-size: 15.5px; line-height: 1.5; padding-left: 18px; position: relative; color: var(--text); }
+    .case-block li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 10px; height: 2px; border-radius: 1px; }
+    .case-before { border-left-color: #d64550; }
+    .case-before h3 { color: #d64550; }
+    .case-before li::before { background: #d64550; opacity: 0.7; }
+    .case-after { border-left-color: #1aab4a; }
+    .case-after h3 { color: #1aab4a; }
+    .case-after li::before { background: #1aab4a; opacity: 0.75; }
+
+    /* Metrics */
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .metric {
+      padding: 16px 18px;
+      border-radius: var(--r);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 3px solid color-mix(in srgb, var(--section-accent) 55%, transparent);
+    }
+    .metric .val {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      color: var(--section-accent);
+    }
+    .metric.up .val { color: #1aab4a; }
+    .metric.up { border-top-color: color-mix(in srgb, #1aab4a 60%, transparent); }
+    .metric.down .val { color: #c47a1f; }
+    .metric.down { border-top-color: color-mix(in srgb, #c47a1f 60%, transparent); }
+    .metric p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .metric p strong { color: var(--text); font-weight: 600; }
+
+    /* Note */
+    .note {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-style: italic;
+      max-width: 80ch;
+      margin-top: 16px;
+    }
+
+    /* Steps */
+    .step {
+      padding: 16px 18px;
+      border-radius: var(--r);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 3px solid color-mix(in srgb, var(--section-accent) 55%, transparent);
+    }
+    .step h3 {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--section-accent);
+      margin-bottom: 10px;
+    }
+    .step p { font-size: 14.5px; color: var(--muted); line-height: 1.5; }
+
+    /* Flow diagram (light) */
+    .flow {
+      margin-top: 0;
+      padding: 14px;
+      border-radius: var(--r);
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+    .flow svg { width: 100%; height: auto; display: block; }
+
+    /* Dashboard demo (light) */
+    .dash {
+      margin-top: 20px;
+      border-radius: var(--r);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      overflow: hidden;
+    }
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fafbfc;
+    }
+    .dash-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .dash-time { font-size: 11px; color: var(--muted); }
+    .dash-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+    .dash-stat { padding: 12px 16px; text-align: center; border-right: 1px solid var(--line); }
+    .dash-stat:last-child { border-right: none; }
+    .dash-stat-value { display: block; font-size: 22px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+    .dash-stat-label { display: block; font-size: 10px; color: var(--muted); margin-top: 5px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .dash-col-header {
+      display: grid;
+      grid-template-columns: 10px 1fr 100px 1fr 80px;
+      gap: 12px;
+      padding: 8px 16px 5px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    .dash-row {
+      display: grid;
+      grid-template-columns: 10px 1fr 100px 1fr 80px;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .dash-row:last-child { border-bottom: none; }
+    .dash-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dash-name { color: var(--text); white-space: nowrap; }
+    .dash-status { font-size: 12px; text-align: right; font-weight: 600; }
+    .dash-bar-wrap { height: 5px; border-radius: 3px; background: rgba(0,0,0,0.06); overflow: hidden; }
+    .dash-bar { display: block; height: 100%; border-radius: 3px; }
+    .dash-pct { font-size: 12px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+    .dash-events { padding: 12px 16px; border-top: 1px solid var(--line); background: #fafbfc; }
+    .dash-events-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .dash-event {
+      display: grid;
+      grid-template-columns: 44px 68px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 12.5px;
+    }
+    .dash-event:last-child { border-bottom: none; }
+    .dash-event-time { color: var(--muted); font-variant-numeric: tabular-nums; }
+    .dash-event-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-align: center;
+      color: #fff;
+      line-height: 1.3;
+      height: fit-content;
+    }
+    .dash-event-text { color: var(--text); line-height: 1.45; }
+    .dash-event-text strong { font-weight: 600; }
+
+    /* Contacts */
+    .contacts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .contact {
+      padding: 14px 18px;
+      border-radius: var(--r);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-top: 3px solid color-mix(in srgb, var(--section-accent) 55%, transparent);
+    }
+    .contact h3 {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--section-accent);
+      margin-bottom: 8px;
+    }
+    .contact a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      border-bottom: 1px solid color-mix(in srgb, var(--section-accent) 40%, transparent);
+    }
+    .contact a:hover { border-bottom-color: var(--section-accent); }
+    .cta-lead { font-size: 17px; line-height: 1.5; color: var(--text); max-width: 56ch; }
+
+    /* Spacers */
+    .spacer-sm { height: 16px; }
+    .spacer { height: 24px; }
+
+    /* Print */
+    @media print {
+      @page { size: A4 portrait; margin: 18mm; }
+      body { background: #fff; }
+      .section-wrap { border-bottom: 1px solid #ccc; page-break-inside: avoid; }
+      section { padding: 28px 0; }
+    }
+
+    /* Mobile */
+    @media (max-width: 860px) {
+      section { padding: 48px 20px; }
+      .site-header-inner { padding: 10px 20px; gap: 12px; }
+      .site-nav {
+        display: none;
+        position: absolute;
+        left: 0; right: 0; top: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 20px 16px;
+        background: #ffffff;
+        border-bottom: 1px solid var(--line);
+      }
+      .site-nav a {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 15px;
+      }
+      .site-nav a:last-child { border-bottom: none; }
+      .site-nav-cta { margin-left: 0; margin-top: 8px; text-align: center; }
+      .site-header-contacts { display: none; }
+      .site-nav-toggle { display: inline-flex; }
+      .site-header.open .site-nav { display: flex; }
+      .cover { grid-template-columns: 1fr; gap: 24px; }
+      .grid-2, .grid-3, .grid-4, .metrics, .contacts { grid-template-columns: 1fr; }
+      .dash-col-header, .dash-row { grid-template-columns: 10px 1fr 90px 80px; }
+      .dash-col-header span:nth-child(4), .dash-row .dash-bar-wrap { display: none; }
+      .dash-stats { grid-template-columns: repeat(2, 1fr); }
+      .dash-stat:nth-child(2) { border-right: none; }
+      .dash-stat:nth-child(1), .dash-stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="site-header-inner">
+      <a class="site-header-brand" href="#top">
+        <img src="./logo.png" alt="ПромАдапт">
+        <span>ПромАдапт</span>
+      </a>
+      <button class="site-nav-toggle" type="button" aria-label="Меню" onclick="document.getElementById('siteHeader').classList.toggle('open')">Меню</button>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a href="#why">Почему мы</a>
+        <a href="#work">Направления</a>
+        <a href="#platform">Платформа</a>
+        <a href="#monitor">Мониторинг</a>
+        <a href="#case">Кейс</a>
+        <a href="#pilot">Пилот</a>
+      </nav>
+      <div class="site-header-contacts" aria-label="Контакты">
+        <a href="mailto:promadapt@rambler.ru">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M4.5 7L12 12.8L19.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>promadapt@rambler.ru</span>
+        </a>
+        <a href="https://t.me/prom_adapt" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.2 4.1L3.9 10.4C2.8 10.8 2.8 12.3 3.9 12.7L8 14.1L9.5 19C9.8 20 11.1 20.2 11.7 19.4L14.4 15.8L18.3 18.7C19.1 19.3 20.2 18.9 20.4 18L22.9 5.9C23.1 4.8 21.2 3.7 20.2 4.1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 14.1L18.7 7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>@prom_adapt</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 01 — Обложка -->
+  <div class="section-wrap section-cover" id="top">
+    <section>
+      <div class="cover-inner">
+        <h1 class="cover-title">Адаптация, мониторинг и аналитика импортного и закрытого оборудования</h1>
+        <p class="cover-subtitle">Подключаем и дорабатываем китайские станки, импортные линии и закрытые контуры автоматики без замены парка.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- 02 — Проблемы -->
+  <div class="section-wrap section-problem">
+    <section>
+      <span class="kicker">Проблема</span>
+      <h2>С чем сталкиваются на производстве</h2>
+      <p class="subtitle">У руководителя, инженера и оператора разные проблемы, но корень один — оборудование непрозрачно.</p>
+
+      <div class="grid-3">
+        <div class="role">
+          <h3>Руководитель</h3>
+          <ul>
+            <li>Парк разношёрстный: часть снята с поддержки, часть — с китайским интерфейсом</li>
+            <li>Отчёты попадают раз в неделю, когда решения уже опоздали</li>
+            <li>Типовые платформы отвечают: «такое оборудование не поддерживается»</li>
+            <li>«Мастер говорит — всё нормально, а заказы срываются»</li>
+          </ul>
+        </div>
+        <div class="role">
+          <h3>Технолог и инженер</h3>
+          <ul>
+            <li>Документация не соответствует реальности: в поле стоит одно, в схемах другое</li>
+            <li>Аварии разбираются по памяти опытного инженера; уходит он — уходят и знания</li>
+            <li>Истории нет: ретроспективный разбор инцидентов невозможен</li>
+            <li>Об отказе датчика узнают не сразу — ждут, пока оператор заметит</li>
+          </ul>
+        </div>
+        <div class="role">
+          <h3>Оператор и рабочий</h3>
+          <ul>
+            <li>Не понимает параметры станка — разбирается методом тыка или избегает настроек</li>
+            <li>Сообщения об ошибках на китайском — останавливает станок и зовёт инженера</li>
+            <li>Выработку и простои заносит в тетрадь или Excel вручную</li>
+            <li>Станочное ПО зависает посреди смены</li>
+            <li>Датчиков в нужной точке нет, меряется на глазок</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 02.5 — Почему мы / Специализация -->
+  <div class="section-wrap section-why" id="why">
+    <section>
+      <span class="kicker">Почему мы</span>
+      <h2>Специализация — импортное и закрытое оборудование</h2>
+
+      <div class="grid-4">
+        <div class="card tinted">
+          <h3>Импортное и снятое с поддержки</h3>
+          <p>Китайские станки и линии, немецкое оборудование без сопровождения, устаревшая автоматика. Подключаем и дорабатываем без замены парка.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Реверс закрытых протоколов</h3>
+          <p>Разбираем проприетарные протоколы контроллеров и пишем драйверы. Данные там, где стандартные шины не работают.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Единое хранилище данных</h3>
+          <p>Factory Data Hub — хранилище, которое ставится на ваш сервер. Одно место для всех станков, линий и контуров автоматики.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Один подрядчик</h3>
+          <p>От русификации пульта до дашбордов и ИИ-аналитики. Один договор, одна зона ответственности.</p>
+        </div>
+      </div>
+
+      <p class="pullquote">Там, где другие говорят «это не подключить», мы разбираем обмен данными и находим рабочий способ.</p>
+    </section>
+  </div>
+
+  <!-- 04 — Доработка оборудования -->
+  <div class="section-wrap section-work" id="work">
+    <section>
+      <span class="kicker">Что мы делаем</span>
+      <h2>Доработка оборудования</h2>
+      <p class="subtitle">Делаем станок понятным для оператора и независимым от одного инженера.</p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Интерфейсы — понятный пульт оператора</h3>
+          <ul class="flat-list">
+            <li><strong>Русификация существующего пульта</strong> — меню, сообщения об ошибках, подсказки</li>
+            <li><strong>Настройка экранов под ваш техпроцесс</strong> — нужное на виду, лишнее убрано</li>
+            <li><strong>Экраны диагностики</strong> — журнал ошибок, счётчики наработки, статус узлов</li>
+            <li><strong>Новый веб-интерфейс с нуля</strong> — если старый безнадёжен; управление через браузер с любого рабочего места</li>
+          </ul>
+          <p class="pullquote">Оператор выходит на полную производительность за 2–3 дня вместо месяца. Падает доля остановок «не понял сообщение» и «нажал не туда».</p>
+        </div>
+        <div>
+          <h3>Документация — знания не зависят от одного человека</h3>
+          <ul class="flat-list">
+            <li><strong>Описание оборудования</strong> — как устроено, режимы, настройки; по тому, что реально разобрали</li>
+            <li><strong>Каталог сигналов</strong> — что собираем, откуда, в каких единицах, с какой частотой</li>
+            <li><strong>Руководство оператора</strong> — со скриншотами именно вашего пульта</li>
+            <li><strong>Регламенты поиска неисправностей</strong> — от сигнала в системе до точки в поле</li>
+            <li><strong>Перевод и актуализация</strong> — английский, немецкий, китайский; приводим к реальной реализации</li>
+          </ul>
+          <p class="pullquote">Новый сотрудник обучается за дни, а не за полгода. Уход ключевого инженера перестаёт быть риском.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 05 — Подключение -->
+  <div class="section-wrap section-connect">
+    <section>
+      <span class="kicker">Подключение</span>
+      <h2>Станки, линии и датчики — в единую систему</h2>
+      <p class="subtitle">Заводим в единый цифровой контур и типовое оборудование, и то, что считалось неподключаемым.</p>
+
+      <ul class="flat-list">
+        <li><strong>Используем то, что уже собирается</strong> — данные из существующей SCADA, архивов, учётных и цеховых систем забираем готовыми, не дублируя сбор</li>
+        <li><strong>Стандартные протоколы и контуры</strong> — быстрое подключение без разработки</li>
+        <li><strong>Закрытые протоколы китайских и устаревших контроллеров</strong> — разбираем и пишем драйверы</li>
+        <li><strong>Внешний съём</strong> — там, где нет доступа к данным: ток, счётчики циклов, оптические датчики</li>
+        <li><strong>Установка датчиков в поле и подключение к существующим контурам автоматики</strong> — там, где сигналов не хватает</li>
+        <li><strong>Переписываем нестабильное станочное ПО</strong> — без зависаний и утечек памяти посреди смены</li>
+      </ul>
+
+      <p class="pullquote"><strong>Результат.</strong> Ручной ввод исчезает. Данные автоматически поступают со всего парка — со станков, линий и датчиков, включая то, что не поддерживают типовые платформы.</p>
+    </section>
+  </div>
+
+  <!-- 06 — Платформа -->
+  <div class="section-wrap section-platform" id="platform">
+    <section>
+      <span class="kicker">Платформа</span>
+      <h2>Factory Data Hub</h2>
+      <p class="subtitle">Хранилище, которое ставится на ваш сервер. Один источник правды для производства, бухгалтерии и ремонтной службы.</p>
+
+      <ul class="flat-list">
+        <li><strong>Данные не уезжают в чужое облако</strong> — подходит закрытым производствам</li>
+        <li><strong>Одно место</strong> — для всех станков, линий и контуров автоматики</li>
+        <li><strong>История за любой период</strong> — для разбора инцидентов и предиктивной аналитики</li>
+        <li><strong>Интеграция с 1С и ERP</strong> — через открытый интерфейс, без двойного ввода</li>
+        <li><strong>Разграничение доступа</strong> — директор видит всё, мастер — свой участок, инженер — свои контуры</li>
+      </ul>
+
+      <div class="flow" style="margin-top: 22px;">
+        <svg viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" aria-label="Поток данных через Factory Data Hub">
+          <defs>
+            <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <polygon points="0 0, 10 5, 0 10" fill="#7e95a9"/>
+            </marker>
+          </defs>
+
+          <g font-family="Inter, sans-serif" font-weight="700" font-size="11" letter-spacing="2" fill="#5d7080">
+            <text x="24" y="18">ИСТОЧНИКИ ДАННЫХ</text>
+            <text x="876" y="18" text-anchor="end">СИСТЕМЫ И ПРОЦЕССЫ</text>
+          </g>
+
+          <g font-family="Inter, sans-serif" fill="#15181c" font-size="15">
+            <rect x="24" y="38" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="129" y="62" text-anchor="middle">Датчики</text>
+
+            <rect x="24" y="86" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="129" y="110" text-anchor="middle">Станки</text>
+
+            <rect x="24" y="134" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="129" y="158" text-anchor="middle">Производственные линии</text>
+
+            <rect x="24" y="182" width="210" height="52" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="129" y="203" text-anchor="middle" font-size="14">Контроллеры / PLC /</text>
+            <text x="129" y="221" text-anchor="middle" font-size="14">АСУ ТП</text>
+          </g>
+
+          <g font-family="Inter, sans-serif" fill="#15181c" font-size="15">
+            <rect x="666" y="38" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="771" y="62" text-anchor="middle">1С / ERP / MES</text>
+
+            <rect x="666" y="86" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="771" y="110" text-anchor="middle" font-size="14">Мониторинг производства</text>
+
+            <rect x="666" y="134" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="771" y="158" text-anchor="middle">Разбор инцидентов</text>
+
+            <rect x="666" y="182" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="771" y="206" text-anchor="middle">Ремонты и ТО</text>
+
+            <rect x="666" y="230" width="210" height="38" rx="8" fill="#ffffff" stroke="#d6e1ea" stroke-width="1.4"/>
+            <text x="771" y="254" text-anchor="middle" font-size="14">Отчётность и аналитика</text>
+          </g>
+
+          <rect x="330" y="100" width="240" height="120" rx="10" fill="#ffffff" stroke="#506d84" stroke-width="2.4"/>
+          <text x="450" y="142" text-anchor="middle" fill="#15181c" font-size="22" font-weight="700" font-family="Inter, sans-serif">Factory Data Hub</text>
+          <text x="450" y="168" text-anchor="middle" fill="#5c7080" font-size="13" font-family="Inter, sans-serif">единое хранилище</text>
+          <text x="450" y="188" text-anchor="middle" fill="#7b8c99" font-size="12" font-family="Inter, sans-serif">на вашем сервере</text>
+
+          <g stroke="#8ea4b7" stroke-width="1.8" fill="none" stroke-linecap="round" marker-end="url(#arr)">
+            <path d="M234 57 C292 57 300 130 330 130"/>
+            <path d="M234 105 C292 105 308 150 330 150"/>
+            <path d="M234 153 C292 153 315 170 330 170"/>
+            <path d="M234 208 C295 208 315 192 330 192"/>
+
+            <path d="M570 130 C618 130 640 57 666 57"/>
+            <path d="M570 155 C618 155 640 105 666 105"/>
+            <path d="M570 175 C618 175 640 153 666 153"/>
+            <path d="M570 195 C618 195 640 201 666 201"/>
+            <path d="M570 215 C618 215 640 249 666 249"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+  </div>
+
+  <!-- 07 — Мониторинг -->
+  <div class="section-wrap section-monitor" id="monitor">
+    <section>
+      <span class="kicker">Мониторинг</span>
+      <h2>Мониторинг и решения</h2>
+      <p class="subtitle">Реальная картина вместо устных отчётов мастера. Простои, аварии и отклонения видны сразу.</p>
+
+      <ul class="flat-list">
+        <li><strong>Дашборды реального времени</strong> — работает / стоит / авария / переналадка</li>
+        <li><strong>Разбор простоев</strong> — планшет оператора сам спрашивает причину остановки</li>
+        <li><strong>Диагностика отказов датчиков и узлов</strong> — обрыв, дрейф, зависшее значение; замечаем до аварии</li>
+        <li><strong>Видеозапись, привязанная к событиям оборудования</strong> — при браке видно, что произошло</li>
+        <li><strong>Автоматические отчёты и уведомления</strong> — по отклонениям</li>
+      </ul>
+
+      <p class="pullquote"><strong>Типичная находка при первом запуске:</strong> 20–30% скрытых простоев, о которых раньше не знали.</p>
+
+      <div class="dash">
+        <div class="dash-header">
+          <span class="dash-title">Мониторинг оборудования</span>
+          <span class="dash-time">Смена 1 · 14:32</span>
+        </div>
+
+        <div class="dash-stats">
+          <div class="dash-stat"><span class="dash-stat-value" style="color:#1aab4a">7</span><span class="dash-stat-label">Работает</span></div>
+          <div class="dash-stat"><span class="dash-stat-value" style="color:#d68a20">2</span><span class="dash-stat-label">Простой</span></div>
+          <div class="dash-stat"><span class="dash-stat-value" style="color:#d64550">1</span><span class="dash-stat-label">Авария</span></div>
+          <div class="dash-stat"><span class="dash-stat-value" style="color:#1ea85a">72%</span><span class="dash-stat-label">OEE</span></div>
+        </div>
+
+        <div class="dash-col-header">
+          <span></span><span>Оборудование</span><span>Статус</span><span>Загрузка за смену</span><span></span>
+        </div>
+        <div>
+          <div class="dash-row">
+            <span class="dash-dot" style="background:#1aab4a"></span>
+            <span class="dash-name">Токарный CK6136</span>
+            <span class="dash-status" style="color:#1aab4a">Работает</span>
+            <span class="dash-bar-wrap"><span class="dash-bar" style="width:87%;background:#1aab4a"></span></span>
+            <span class="dash-pct">6ч 58м</span>
+          </div>
+          <div class="dash-row">
+            <span class="dash-dot" style="background:#1aab4a"></span>
+            <span class="dash-name">Фрезерный XK7124</span>
+            <span class="dash-status" style="color:#1aab4a">Работает</span>
+            <span class="dash-bar-wrap"><span class="dash-bar" style="width:92%;background:#1aab4a"></span></span>
+            <span class="dash-pct">7ч 22м</span>
+          </div>
+          <div class="dash-row">
+            <span class="dash-dot" style="background:#d68a20"></span>
+            <span class="dash-name">Пресс YL41-100</span>
+            <span class="dash-status" style="color:#d68a20">Переналадка</span>
+            <span class="dash-bar-wrap"><span class="dash-bar" style="width:34%;background:#d68a20"></span></span>
+            <span class="dash-pct">2ч 43м</span>
+          </div>
+          <div class="dash-row">
+            <span class="dash-dot" style="background:#d64550"></span>
+            <span class="dash-name">Конвейер LPM-800</span>
+            <span class="dash-status" style="color:#d64550">Авария</span>
+            <span class="dash-bar-wrap"><span class="dash-bar" style="width:12%;background:#d64550"></span></span>
+            <span class="dash-pct">0ч 58м</span>
+          </div>
+        </div>
+
+        <div class="dash-events">
+          <div class="dash-events-title">События</div>
+          <div class="dash-event">
+            <span class="dash-event-time">14:18</span>
+            <span class="dash-event-badge" style="background:#d64550">Авария</span>
+            <span class="dash-event-text"><strong>Конвейер LPM-800</strong> — перегрев привода, остановлен автоматически. Код E-041</span>
+          </div>
+          <div class="dash-event">
+            <span class="dash-event-time">13:52</span>
+            <span class="dash-event-badge" style="background:#d68a20">Ошибка</span>
+            <span class="dash-event-text"><strong>Пресс YL41-100</strong> — давление масла ниже нормы (12.4 бар при минимуме 14)</span>
+          </div>
+          <div class="dash-event">
+            <span class="dash-event-time">12:07</span>
+            <span class="dash-event-badge" style="background:#d68a20">Простой</span>
+            <span class="dash-event-text"><strong>Пресс YL41-100</strong> — переналадка, оператор указал причину: смена пресс-формы</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 08 — ИИ -->
+  <div class="section-wrap section-ai">
+    <section>
+      <span class="kicker">Надстройка</span>
+      <h2>Расширенная аналитика и искусственный интеллект</h2>
+      <p class="subtitle">Когда данные собираются и хранятся, подключаем слой, который не просто показывает состояние, а помогает принимать решения.</p>
+
+      <ul class="flat-list">
+        <li><strong>Прогноз износа и отказа узла</strong> — срок до замены по реальной истории, а не по регламенту</li>
+        <li><strong>Поиск причин брака</strong> — связываем брак с режимами, сменами, партиями сырья, температурой</li>
+        <li><strong>Аномалии по набору сигналов</strong> — нетипичное поведение, которое по одному параметру незаметно</li>
+        <li><strong>Оптимизация режимов</strong> — подсказка оператору и технологу: где выработка выше при том же качестве</li>
+        <li><strong>Компьютерное зрение</strong> — контроль брака, средств защиты, присутствия на рабочем месте по видеопотоку</li>
+      </ul>
+
+      <p class="pullquote"><strong>Пример.</strong> Датчик температуры две недели отдавал стабильное значение — формально всё в норме. Модель заметила, что соседние сигналы двигаются в привычной связке, а этот застыл; затем значения поплыли с запаздыванием и дали выброс за физически возможный диапазон. Датчик помечен как ненадёжный до того, как узел перегрелся.</p>
+      <p class="note">Подключается следующим шагом после мониторинга, когда уже накоплены данные, на которых можно учить модели.</p>
+    </section>
+  </div>
+
+  <!-- 09 — Кейс -->
+  <div class="section-wrap section-case" id="case">
+    <section>
+      <span class="kicker">Пример из практики</span>
+      <h2>Конвейерные этикеточные станки</h2>
+      <p class="subtitle">Китайское оборудование с закрытым контроллером. Типовые платформы не подходили.</p>
+
+      <div class="grid-2">
+        <div class="case-block case-before">
+          <h3>Было</h3>
+          <ul>
+            <li>Интерфейс на китайском, документации нет</li>
+            <li>Оператор не понимал параметры настройки — падало качество и случались лишние остановки</li>
+            <li>Стандартные системы мониторинга не могли подключиться: протокол закрытый</li>
+            <li>Данные о тиражах заносили вручную</li>
+          </ul>
+        </div>
+        <div class="case-block case-after">
+          <h3>Сделали</h3>
+          <ul>
+            <li>Разобрали протокол и написали свой драйвер — станок начал отдавать данные</li>
+            <li>Сделали русский веб-интерфейс с управлением через браузер</li>
+            <li>Подключили 1С: тиражи, простои и выработка попадают в учёт автоматически</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="pullquote"><strong>Результат.</strong> Станок стал понятным для оператора, подключённым к учётной системе и управляемым для руководства без ручного сбора информации.</p>
+    </section>
+  </div>
+
+  <!-- 10 — Эффект -->
+  <div class="section-wrap section-value">
+    <section>
+      <span class="kicker">Эффект</span>
+      <h2>Эффект цифровизации</h2>
+      <p class="subtitle">Мировые ориентиры по мониторингу, аналитике и цифровизации производства. Эффект от русификации пульта и документации проявляется отдельно: меньше ошибок, быстрее ввод новых сотрудников, меньше зависимость от одного человека.</p>
+
+      <div class="metrics">
+        <div class="metric up">
+          <span class="val">↑ +10–20%</span>
+          <p><strong>к выпуску</strong> — когда видны узкие места, простои и реальная загрузка, производство быстрее возвращает мощность в работу</p>
+        </div>
+        <div class="metric up">
+          <span class="val">↑ +7–20%</span>
+          <p><strong>к производительности труда</strong> — меньше времени на ручной сбор, устные сверки и поиск причин отклонений</p>
+        </div>
+        <div class="metric up">
+          <span class="val">↑ +10–15%</span>
+          <p><strong>мощности</strong> — за счёт прозрачной загрузки и управляемого ритма высвобождается мощность без покупки нового оборудования</p>
+        </div>
+        <div class="metric down">
+          <span class="val">↓ до −26%</span>
+          <p><strong>затрат на выпуск</strong> — на лучших мировых площадках цифровые решения улучшают экономику без расширения парка</p>
+        </div>
+      </div>
+
+      <p class="note">Цифры — мировые ориентиры по данным Deloitte и World Economic Forum. Фактический эффект зависит от типа оборудования, дисциплины производства и глубины внедрения.</p>
+    </section>
+  </div>
+
+  <!-- 11 — Пилот -->
+  <div class="section-wrap section-pilot" id="pilot">
+    <section>
+      <span class="kicker">Старт</span>
+      <h2>Пилот и старт</h2>
+      <p class="subtitle">Начинаем с короткой технической оценки и сразу определяем, есть ли смысл в пилоте и что в него должно войти.</p>
+
+      <div class="grid-3">
+        <div class="step">
+          <h3>Шаг 1 — от вас</h3>
+          <p>Короткое описание производства и уже имеющихся систем (учёт, SCADA, архивы данных), фото шильдика оборудования и пульта, суть проблемы и желаемый результат.</p>
+        </div>
+        <div class="step">
+          <h3>Шаг 2 — от нас</h3>
+          <p>Оценка вариантов подключения, доработки интерфейса и состава пилота под вашу задачу.</p>
+        </div>
+        <div class="step">
+          <h3>Шаг 3 — на выходе</h3>
+          <p>Понимание, что именно делаем, как стартуем и по каким критериям принимается решение о масштабировании.</p>
+        </div>
+      </div>
+
+      <p class="note">Там, где это возможно, подключаем без остановки производства. Если нужен технологический доступ, заранее согласовываем окно работ.</p>
+    </section>
+  </div>
+
+  <!-- 12 — Контакты -->
+  <div class="section-wrap section-cta" id="contacts">
+    <section>
+      <span class="kicker">Связаться с нами</span>
+      <h2>Контакты</h2>
+      <p class="cta-lead">Что сейчас не работает и что хотите получить. Решим, как это подключить, доработать и запустить.</p>
+
+      <div class="contacts">
+        <div class="contact">
+          <h3>Почта</h3>
+          <a href="mailto:promadapt@rambler.ru">promadapt@rambler.ru</a>
+        </div>
+        <div class="contact">
+          <h3>Telegram</h3>
+          <a href="https://t.me/prom_adapt" target="_blank" rel="noreferrer">@prom_adapt</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
