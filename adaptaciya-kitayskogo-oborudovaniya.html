@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адаптация китайского оборудования: русификация, подключение, мониторинг — ПромАдапт</title>
+  <meta name="description" content="Адаптация китайских станков и линий: подключение к ЧПУ и PLC, съём простоев и выработки, понятный оператору интерфейс и документация, интеграция с учётом. Состав — под конкретное оборудование.">
+  <meta name="keywords" content="адаптация китайского оборудования, перевод китайского пульта, подключение китайских ЧПУ, мониторинг китайских станков, интеграция китайского оборудования">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#2a9bb5">
+  <link rel="canonical" href="https://promadapt.ru/adaptaciya-kitayskogo-oborudovaniya.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Адаптация китайского оборудования — ПромАдапт">
+  <meta property="og:description" content="Делаем китайский станок понятным оператору и включаем его в цифровой контур производства. Интерфейс, документация, подключение, мониторинг — под конкретное оборудование.">
+  <meta property="og:url" content="https://promadapt.ru/adaptaciya-kitayskogo-oborudovaniya.html">
+  <meta property="og:image" content="https://promadapt.ru/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Адаптация китайского оборудования — ПромАдапт">
+  <meta name="twitter:description" content="Подключение, мониторинг и адаптация интерфейса китайских станков и линий на российских производствах.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Адаптация китайского промышленного оборудования",
+    "serviceType": "Подключение, мониторинг и адаптация интерфейса китайских станков и линий",
+    "provider": {
+      "@type": "Organization",
+      "name": "ПромАдапт",
+      "url": "https://promadapt.ru/",
+      "logo": "https://promadapt.ru/logo.png",
+      "email": "promadapt@rambler.ru",
+      "sameAs": ["https://t.me/prom_adapt"]
+    },
+    "areaServed": {"@type": "Country", "name": "Россия"},
+    "description": "Подключение к ЧПУ и PLC китайского оборудования, съём данных с закрытых контроллеров, понятный оператору интерфейс и документация, мониторинг простоев и выработки, интеграция с учётными системами. Состав работ определяется по конкретной модели.",
+    "url": "https://promadapt.ru/adaptaciya-kitayskogo-oborudovaniya.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://promadapt.ru/"},
+      {"@type": "ListItem", "position": 2, "name": "Адаптация китайского оборудования", "item": "https://promadapt.ru/adaptaciya-kitayskogo-oborudovaniya.html"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "У нас HMI скорее на ломаном английском, чем на китайском — это тоже ваша тема?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Да, и это едва ли не чаще встречается, чем чистые иероглифы. Формулировки вроде «Axis over travel plus side» или «Spindle orient not finish» формально по-английски, но оператору без опыта ничего не говорят. Делаем то же, что и с китайским: подсказки, расшифровку кодов, памятки. Замены языка в HMI при этом может и не потребоваться."}
+      },
+      {
+        "@type": "Question",
+        "name": "Реально ли перевести HMI обрабатывающего центра на русский?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Полностью заменить язык в закрытом заводском HMI удаётся редко. Где штатная система допускает выбор языка — включаем русский. Где не допускает — делаем внешнее решение: памятки, перевод кодов ошибок, отдельный экран с подсказками рядом с пультом."}
+      },
+      {
+        "@type": "Question",
+        "name": "Можно ли подключиться к китайскому станку без замены контроллера?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Часто — да, если контроллер отдаёт данные через сетевой интерфейс или дискретные сигналы. Но есть модели, из которых без вмешательства в железо не получить ничего. Определяется на этапе оценки."}
+      },
+      {
+        "@type": "Question",
+        "name": "Что делать, если нет документации и поставщик не отвечает?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Описываем по факту то, что реально используется в смене: параметры, типовые аварии, регламентные действия. Не претендуем на восстановление полного заводского мануала."}
+      },
+      {
+        "@type": "Question",
+        "name": "Какие данные удастся снять со станка?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Зависит от контроллера. На одних получаем состояние, коды ошибок и счётчики; на других — только факт «работает/не работает». До подключения точный список не называем."}
+      },
+      {
+        "@type": "Question",
+        "name": "Нужно ли останавливать производство?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Обычно нет: съём данных и установку сборщика делаем параллельно производству. Если потребуется технологическое окно — согласовываем заранее."}
+      },
+      {
+        "@type": "Question",
+        "name": "Где хранятся данные — в облаке или у нас?",
+        "acceptedAnswer": {"@type": "Answer", "text": "По умолчанию — на вашем сервере, данные не уходят за периметр. Облачный вариант возможен, но только под конкретный осознанный сценарий."}
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --line: rgba(0, 0, 0, 0.09);
+      --text: #15181c;
+      --muted: #5d6974;
+      --accent: #2a9bb5;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --max-w: 1120px;
+      --r: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 var(--font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--accent); }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: saturate(150%) blur(10px);
+      -webkit-backdrop-filter: saturate(150%) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 12px 32px;
+      display: flex; align-items: center; gap: 28px;
+    }
+    .site-header-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+      font-weight: 700; font-size: 16px; letter-spacing: -0.01em;
+    }
+    .site-header-brand img { height: 28px; width: auto; display: block; }
+    .site-nav { display: flex; align-items: center; gap: 22px; flex: 1 1 auto; }
+    .site-nav a {
+      font-size: 14px; font-weight: 500; color: var(--muted);
+      text-decoration: none; transition: color .15s ease; white-space: nowrap;
+    }
+    .site-nav a:hover { color: var(--text); }
+    .site-header-contacts { display: flex; align-items: center; gap: 16px; }
+    .site-header-contacts a {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--text);
+      text-decoration: none; white-space: nowrap;
+    }
+    .site-header-contacts a:hover { color: var(--accent); }
+    .site-header-contacts svg { width: 14px; height: 14px; display: block; }
+
+    .section-wrap {
+      --section-accent: var(--accent);
+      --section-tint: var(--surface);
+      background: var(--section-tint);
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 68px;
+    }
+    .section-wrap:last-child { border-bottom: none; }
+    section {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 56px 32px;
+    }
+
+    .section-hero {
+      --section-accent: #8fd3e0;
+      --section-tint: #0d1b24;
+      color: #eef3f6;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(13,27,36,0.78) 0%, rgba(13,27,36,0.9) 100%),
+        url("./cover.jpg") center/cover no-repeat;
+    }
+    .section-hero .kicker { color: var(--section-accent); }
+    .section-hero h1 { color: #fff; }
+    .section-hero p { color: #cdd8df; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 28px 28px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .hero-badge-token {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 96px;
+    }
+    .hero-badge-token .glyph {
+      font-size: clamp(44px, 6vw, 64px);
+      line-height: 1;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .hero-badge-token .glyph.ru {
+      font-family: "Inter", sans-serif;
+    }
+    .hero-badge-token .label {
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8fd3e0;
+      font-weight: 600;
+    }
+    .hero-badge-arrow {
+      font-size: clamp(32px, 4vw, 44px);
+      color: #8fd3e0;
+      line-height: 1;
+    }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 28px; }
+      .hero-badge { padding: 22px 16px; }
+    }
+
+    .section-problem  { --section-accent: #c44450; }
+    .section-services { --section-accent: #23777b; --section-tint: #fafbfc; }
+    .section-types    { --section-accent: #506d84; }
+    .section-process  { --section-accent: #2e8b57; --section-tint: #fafbfc; }
+    .section-result   { --section-accent: #c47a1f; }
+    .section-faq      { --section-accent: #6a56a5; --section-tint: #fafbfc; }
+    .section-extra    { --section-accent: #8b5e3c; }
+    .section-limits   { --section-accent: #c44450; --section-tint: #fafbfc; }
+    .section-cta      { --section-accent: #4d63d9; }
+
+    .breadcrumbs {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 14px 32px 0;
+      font-size: 13px; color: var(--muted);
+    }
+    .breadcrumbs a { color: var(--muted); text-decoration: none; }
+    .breadcrumbs a:hover { color: var(--accent); }
+
+    .kicker {
+      display: inline-block;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--section-accent); margin-bottom: 10px;
+    }
+    h1 {
+      font-size: clamp(28px, 3.4vw, 40px);
+      line-height: 1.1; letter-spacing: -0.02em;
+      font-weight: 700; max-width: 24ch;
+    }
+    h2 {
+      font-size: clamp(22px, 2.4vw, 28px);
+      line-height: 1.15; letter-spacing: -0.02em;
+      font-weight: 700; margin-bottom: 8px; max-width: 28ch;
+    }
+    h3 {
+      font-size: 17px; line-height: 1.3;
+      letter-spacing: -0.005em; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 16px; line-height: 1.55;
+      color: var(--muted); max-width: 72ch;
+      margin-bottom: 24px;
+    }
+    .section-hero .subtitle { color: #cdd8df; }
+    p { max-width: 74ch; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    .card {
+      padding: 18px 20px; border-radius: var(--r);
+      border: 1px solid var(--line); background: var(--surface);
+    }
+    .card p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+    .card.tinted {
+      background: color-mix(in srgb, var(--section-accent) 5%, var(--surface));
+      border-color: color-mix(in srgb, var(--section-accent) 18%, var(--line));
+    }
+
+    .flat-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .flat-list li {
+      position: relative; padding-left: 18px;
+      font-size: 15.5px; line-height: 1.55; color: var(--text);
+    }
+    .flat-list li::before {
+      content: ""; position: absolute; left: 0; top: 0.68em;
+      width: 10px; height: 2px; background: var(--section-accent);
+      border-radius: 1px;
+    }
+    .flat-list li strong { font-weight: 600; }
+
+    .pullquote {
+      margin-top: 20px; padding: 14px 18px;
+      border-left: 3px solid color-mix(in srgb, var(--section-accent) 55%, transparent);
+      background: color-mix(in srgb, var(--section-accent) 5%, var(--surface));
+      border-radius: 0 var(--r) var(--r) 0;
+      font-size: 15.5px; line-height: 1.55; color: var(--text);
+      max-width: 82ch;
+    }
+
+    .faq details {
+      border: 1px solid var(--line); border-radius: var(--r);
+      padding: 14px 18px; background: var(--surface);
+      margin-bottom: 10px;
+    }
+    .faq details[open] { border-color: color-mix(in srgb, var(--section-accent) 30%, var(--line)); }
+    .faq summary {
+      cursor: pointer; font-weight: 600; font-size: 15.5px;
+      list-style: none;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+"; float: right; font-weight: 400;
+      color: var(--section-accent); font-size: 20px; line-height: 1;
+    }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p { margin-top: 10px; color: var(--muted); font-size: 15px; }
+
+    .cta-box {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      margin-top: 20px;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 8px;
+      font-weight: 600; font-size: 15px;
+      text-decoration: none; transition: background .15s;
+    }
+    .cta-btn.primary { background: var(--section-accent); color: #fff; }
+    .cta-btn.primary:hover { filter: brightness(0.92); }
+    .cta-btn.secondary {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .cta-btn.secondary:hover { border-color: var(--section-accent); color: var(--section-accent); }
+
+    .footer {
+      padding: 28px 32px; max-width: var(--max-w);
+      margin: 0 auto; font-size: 13px; color: var(--muted);
+      display: flex; flex-wrap: wrap; gap: 12px 24px;
+      justify-content: space-between;
+    }
+    .footer a { color: var(--muted); text-decoration: none; }
+    .footer a:hover { color: var(--accent); }
+
+    @media (max-width: 860px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .site-header-inner { padding: 10px 20px; gap: 12px; }
+      .site-header-contacts { display: none; }
+      section { padding: 40px 20px; }
+      .breadcrumbs { padding: 10px 20px 0; }
+    }
+    @media (max-width: 560px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .site-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-header-brand" href="/">
+        <img src="./logo.png" alt="ПромАдапт">
+        <span>ПромАдапт</span>
+      </a>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a href="/#why">Почему мы</a>
+        <a href="/#work">Направления</a>
+        <a href="/#platform">Платформа</a>
+        <a href="/#case">Кейс</a>
+        <a href="/adaptaciya-kitayskogo-oborudovaniya.html">Китайское оборудование</a>
+      </nav>
+      <div class="site-header-contacts" aria-label="Контакты">
+        <a href="mailto:promadapt@rambler.ru">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M4.5 7L12 12.8L19.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>promadapt@rambler.ru</span>
+        </a>
+        <a href="https://t.me/prom_adapt" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.2 4.1L3.9 10.4C2.8 10.8 2.8 12.3 3.9 12.7L8 14.1L9.5 19C9.8 20 11.1 20.2 11.7 19.4L14.4 15.8L18.3 18.7C19.1 19.3 20.2 18.9 20.4 18L22.9 5.9C23.1 4.8 21.2 3.7 20.2 4.1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 14.1L18.7 7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>@prom_adapt</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a> &nbsp;›&nbsp; <span>Адаптация китайского оборудования</span>
+  </nav>
+
+  <div class="section-wrap section-hero">
+    <section>
+      <div class="hero-inner">
+        <div>
+          <span class="kicker">Услуга</span>
+          <h1>Адаптация китайского промышленного оборудования</h1>
+          <p class="subtitle">Основные боли с китайским оборудованием — закрытое ПО, которое отказывается общаться со сторонними системами, и потерянная после отгрузки поддержка. Мы занимаемся именно этим: подключаемся к ЧПУ и PLC, снимаем данные, делаем интерфейс понятным оператору, интегрируем с учётом. С запчастями и физическим ремонтом железа — не к нам.</p>
+          <div class="cta-box">
+            <a class="cta-btn primary" href="#cta">Обсудить ваш случай</a>
+            <a class="cta-btn secondary" href="#services">Что делаем</a>
+          </div>
+        </div>
+        <div class="hero-badge" aria-label="Непонятный станок → понятный оператору">
+          <div class="hero-badge-token">
+            <span class="glyph" lang="zh">中</span>
+            <span class="label">Как есть</span>
+          </div>
+          <div class="hero-badge-arrow" aria-hidden="true">→</div>
+          <div class="hero-badge-token">
+            <span class="glyph ru">Рус</span>
+            <span class="label">Понятно</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="section-wrap section-problem">
+    <section>
+      <span class="kicker">Проблема</span>
+      <h2>Что реально болит у владельцев китайского парка</h2>
+      <p class="subtitle">По материалам отраслевой прессы и наших разговоров с заводами. Про общие проблемы производства — <a href="/#problem">на главной</a>, здесь только то, что специфично именно для китайского оборудования.</p>
+
+      <div class="grid-2">
+        <div class="card tinted">
+          <h3>Закрытое ПО и протоколы</h3>
+          <p>Китайские вендоры неохотно открывают обмен со сторонними системами — это признаётся как «протекционистская модель». Штатные платформы мониторинга и учёта отвечают «не поддерживается», подключиться по Modbus/OPC UA напрямую часто не получается.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Поддержка теряется после отгрузки</h3>
+          <p>Поставщик не отвечает или отвечает формально. Санкции и часовые пояса ломают любой сценарий, где нужен контакт с заводом. Даже когда бренд рабочий, электронных каталогов запчастей и сервисных мануалов для российского рынка обычно нет.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Непонятный интерфейс и документация</h3>
+          <p>Где-то иероглифы, где-то машинный английский, где-то вперемешку. Формулировки и коды ошибок часто такие, что без опыта догадаться нельзя. Мануал — часть на китайском, часть от предыдущей ревизии, в комплектации станка — другое железо.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Коды ошибок без расшифровки</h3>
+          <p>Оператор видит номер ошибки, но нигде не описано, что с ней делать. Каждый такой эпизод — остановка и вызов инженера, а то и простой до приезда наладчика.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Сырая прошивка и мелкие баги</h3>
+          <p>Экран периодически зависает, параметр сбрасывается после перезагрузки, сигнализация не срабатывает. По отдельности не критично, но накапливается и мешает работать в смену.</p>
+        </div>
+        <div class="card tinted">
+          <h3>Нестабильные российские условия</h3>
+          <p>Станки проектируются под мягкий климат и чистое питание. У нас — пыль, перепады напряжения, скачки температуры. Часть «неожиданных» сбоев — на самом деле реакция автоматики на условия, к которым её не готовили.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="section-wrap section-services" id="services">
+    <section>
+      <span class="kicker">Что делаем</span>
+      <h2>Что именно относится к адаптации китайского парка</h2>
+      <p class="subtitle">Здесь — только работы, специфичные для китайского оборудования. Общие направления (мониторинг, Factory Data Hub, интеграция с учётом, доработка автоматики) описаны <a href="/#work">на главной</a> — они одинаковы для любого парка.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Понятный интерфейс для оператора</h3>
+          <p>Если штатный HMI допускает смену языка или редактирование строк — переводим. Если закрыт (частый случай на обрабатывающих центрах) — делаем внешние памятки и экран с расшифровкой кодов и меню рядом с пультом. Язык оригинала (китайский, ломаный английский, смешанный) здесь вторичен — задача в том, чтобы оператор понимал, что происходит.</p>
+        </div>
+        <div class="card">
+          <h3>Документация на русском по факту</h3>
+          <p>Описываем то, что реально используется в смене: параметры, типовые аварии, регламентные действия. Не претендуем на полный перевод заводского мануала.</p>
+        </div>
+        <div class="card">
+          <h3>Подключение к китайскому ЧПУ и PLC</h3>
+          <p>Смотрим, какие данные отдаёт конкретный контроллер через доступные интерфейсы. Часто там, где типовые платформы говорят «не поддерживается», удаётся что-то вытащить — но не всегда.</p>
+        </div>
+        <div class="card">
+          <h3>Разбор закрытого обмена</h3>
+          <p>Когда стандартные протоколы не дают нужного, исследуем проприетарный обмен. Где это технически возможно — подключаемся, где нет — говорим об этом прямо.</p>
+        </div>
+      </div>
+
+      <p class="pullquote">Не обещаем «подключить что угодно». На этапе оценки честно говорим, что реально вытащить из конкретного контроллера, а что — нет.</p>
+    </section>
+  </div>
+
+  <div class="section-wrap section-types">
+    <section>
+      <span class="kicker">Оборудование</span>
+      <h2>С каким китайским оборудованием работаем</h2>
+      <p class="subtitle">Не делаем вид, что подходим под любой парк. Работаем с категориями ниже — если вашей здесь нет, напишите, оценим по фото шильдика и пульта, или честно скажем, что задача не наша.</p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Станки с ЧПУ</h3>
+          <ul class="flat-list">
+            <li>Токарные и фрезерные обрабатывающие центры</li>
+            <li>Листовая обработка: резка, гибка</li>
+            <li>Электроэрозионные станки</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Линии и автоматика</h3>
+          <ul class="flat-list">
+            <li>Упаковочные и фасовочные линии</li>
+            <li>Деревообрабатывающие линии</li>
+            <li>Контуры PLC и SCADA без русского интерфейса</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top: 20px; font-size: 14px; color: var(--muted);">Что именно получится сделать на конкретном станке — зависит от модели контроллера и от того, открыт ли он для сторонней интеграции. Это определяется на этапе оценки, а не обещается заранее.</p>
+    </section>
+  </div>
+
+  <div class="section-wrap section-process">
+    <section>
+      <span class="kicker">Процесс</span>
+      <h2>Как адаптируем китайский станок</h2>
+      <p class="subtitle">Каждый этап завершается решением «идём дальше» — никаких обязательств вслепую. На первом шаге может выясниться, что подключение нерентабельно или невозможно — это тоже результат.</p>
+
+      <div class="grid-4">
+        <div class="card tinted">
+          <h3>1. Оценка</h3>
+          <p>Фото шильдика, пульта, шкафа и описание проблемы. Смотрим, что за контроллер, какие у него интерфейсы и что реально можно сделать.</p>
+        </div>
+        <div class="card tinted">
+          <h3>2. Подключение и съём</h3>
+          <p>Пробуем снять данные с контроллера доступными способами. Фиксируем, что получилось прочитать, что — нет.</p>
+        </div>
+        <div class="card tinted">
+          <h3>3. Работа с интерфейсом</h3>
+          <p>Перевод меню и кодов там, где штатный HMI это позволяет. Внешние памятки и подсказки там, где не позволяет.</p>
+        </div>
+        <div class="card tinted">
+          <h3>4. Мониторинг и интеграция</h3>
+          <p>Дашборды простоев и выпуска, передача данных в учётную систему, уведомления — по тому набору показателей, который удалось снять.</p>
+        </div>
+      </div>
+
+      <p class="pullquote">Сроки не называем по фото — на одном и том же классе станков они сильно различаются. Оценку с прогнозом дадим после первого шага.</p>
+    </section>
+  </div>
+
+  <div class="section-wrap section-faq">
+    <section>
+      <span class="kicker">Вопросы</span>
+      <h2>Частые вопросы</h2>
+      <div class="faq">
+        <details>
+          <summary>У нас HMI скорее на ломаном английском, чем на китайском — это тоже ваша тема?</summary>
+          <p>Да, и это едва ли не чаще встречается, чем чистые иероглифы. Формулировки вроде «Axis over travel plus side» или «Spindle orient not finish» формально по-английски, но оператору без опыта на этом станке ничего не говорят. Делаем то же, что и с китайским: понятные подсказки, расшифровку кодов, памятки по типовым авариям. Замены языка в HMI при этом может и не потребоваться.</p>
+        </details>
+        <details>
+          <summary>Реально ли перевести HMI обрабатывающего центра на русский?</summary>
+          <p>Полностью заменить язык в закрытом заводском HMI удаётся редко — обычно это запрещено лицензией или технически невозможно без инструментов производителя. Что реально: где штатная система допускает выбор языка — включаем русский; где нет — делаем внешнее решение (памятки, расшифровка кодов ошибок, отдельный экран с подсказками рядом с пультом). Оцениваем по конкретной модели.</p>
+        </details>
+        <details>
+          <summary>Можно ли подключиться без замены контроллера?</summary>
+          <p>Часто — да, если контроллер отдаёт хоть какие-то данные через сетевой интерфейс или дискретные сигналы. Но не всегда: есть модели, из которых без вмешательства в железо не получить ничего. Это видно на этапе оценки.</p>
+        </details>
+        <details>
+          <summary>Что делать, если нет документации и поставщик не отвечает?</summary>
+          <p>Работаем по факту: описываем то, что реально используется в смене — параметры, типовые аварии, регламентные действия. Не претендуем на восстановление полного заводского мануала.</p>
+        </details>
+        <details>
+          <summary>Какие данные удастся снять со станка?</summary>
+          <p>Зависит от контроллера. На одних получаем состояние, коды ошибок и счётчики; на других — только факт «работает/не работает». До подключения точный список не называем.</p>
+        </details>
+        <details>
+          <summary>Нужно ли останавливать производство?</summary>
+          <p>Стараемся работать без остановки — съём данных и установку сборщика обычно удаётся сделать параллельно производству. Если потребуется технологическое окно, согласовываем заранее.</p>
+        </details>
+        <details>
+          <summary>Где хранятся данные — в облаке или у нас?</summary>
+          <p>По умолчанию — на вашем сервере, данные не уходят за периметр. Облачный вариант возможен, но только под конкретный осознанный сценарий.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+
+  <div class="section-wrap section-extra">
+    <section>
+      <span class="kicker">Дополнительно</span>
+      <h2>Ещё с чем помогаем</h2>
+      <p class="subtitle">Это не основные направления и делаем их по ситуации — когда видим, что задача решаема и вписывается в общую адаптацию парка.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Реверс-инжиниринг обмена</h3>
+          <p>Разбираем, как контроллер общается с пультом или внешними устройствами, чтобы понять, где лежат нужные данные. Работает не на любом оборудовании — зависит от того, что удаётся снять с шины и насколько обмен поддаётся анализу.</p>
+        </div>
+        <div class="card">
+          <h3>Переделка функционала под ваш процесс</h3>
+          <p>Станок делает не совсем то, что нужно: логика цикла неудобна, не хватает режима, мешает «лишняя» защита. Если контроллер и лицензия это позволяют — меняем поведение. Когда лезть в штатную логику нельзя — делаем внешний контур поверх.</p>
+        </div>
+        <div class="card">
+          <h3>Разбор повторяющихся ошибок</h3>
+          <p>Типовые аварии, которые выскакивают раз в смену и не объяснены в документации. Снимаем контекст вокруг срабатывания, ищем закономерность, описываем, как действовать оператору. Иногда удаётся устранить причину, иногда — только сделать сценарий понятным.</p>
+        </div>
+        <div class="card">
+          <h3>Доработки мелочей, которые мешают</h3>
+          <p>Кнопка не там, сигнализация не слышна, параметр сбрасывается при перезагрузке, экран зависает раз в день. Разбираемся по месту — часто это вопрос пары дней, а не отдельного проекта.</p>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top: 20px; font-size: 14px; color: var(--muted);">Всё из этого списка — не «стандартная услуга из прайса», а работа под конкретный случай. Если сомневаетесь, подпадает ли ваша задача — напишите, скажем честно.</p>
+    </section>
+  </div>
+
+  <div class="section-wrap section-limits">
+    <section>
+      <span class="kicker">Границы</span>
+      <h2>С чем мы НЕ помогаем</h2>
+      <p class="subtitle">У китайского парка есть боли, про которые нас часто спрашивают, но это не наш профиль. Говорим сразу, чтобы не тратить ваше время.</p>
+
+      <ul class="flat-list">
+        <li><strong>Поставка запчастей и расходников.</strong> Мы не дилер и не держим склад. За оригинальными узлами, приводами, вакуумными присосками — к поставщикам оборудования или специализированным компаниям.</li>
+        <li><strong>Физический ремонт железа.</strong> Замена шпинделя, перемотка двигателя, ремонт ШВП, настройка геометрии станка — работа механиков и сервисной бригады, не наша.</li>
+        <li><strong>Климатическая и энергетическая защита.</strong> Шкафы с кондиционированием, стабилизаторы, заземление, защита от пыли — отдельная инженерия, лучше делать вместе с электриками и шкафщиками.</li>
+        <li><strong>Оценка «стоит ли вообще покупать этот станок».</strong> Экспертиза закупки, выбор вендора, сравнение моделей до контракта — не к нам. Мы включаемся, когда станок уже на площадке.</li>
+        <li><strong>Обход лицензионных ограничений и взлом прошивок.</strong> Не занимаемся. Если закрытая прошивка не отдаёт данные легальным способом — так и говорим.</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="section-wrap section-cta" id="cta">
+    <section>
+      <span class="kicker">Старт</span>
+      <h2>Оценим ваше оборудование</h2>
+      <p class="subtitle">Пришлите фото шильдика, пульта и короткое описание проблемы. Вернёмся с оценкой: что реально подключить, что русифицировать и каким будет состав пилота.</p>
+      <div class="cta-box">
+        <a class="cta-btn primary" href="mailto:promadapt@rambler.ru?subject=Адаптация%20китайского%20оборудования">Написать на почту</a>
+        <a class="cta-btn secondary" href="https://t.me/prom_adapt" target="_blank" rel="noreferrer">Telegram @prom_adapt</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer">
+      <span>© ПромАдапт — адаптация импортного и закрытого оборудования</span>
+      <span><a href="/">Главная</a> · <a href="mailto:promadapt@rambler.ru">promadapt@rambler.ru</a> · <a href="https://t.me/prom_adapt" target="_blank" rel="noreferrer">@prom_adapt</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>
